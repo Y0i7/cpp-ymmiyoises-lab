@@ -1,51 +1,27 @@
-#include <iostream>
-#include <conio.h>
-#include <windows.h>
-#include "items/Player.h"
-#include "config/WindowsConfig.h"
+/*
+ ? AUTHOR: Orlando Yepes Espitia
+    - 30/10/2026
+ */
+#include "config/os/WindowsConfig.h"
+#include "actions/movements/MovementRecorder.h"
 
+/*
+ TODO:
+    - Implement Coin functionality to be able to collect coins and increase the player's score.
+    - Implement a scoring system to keep track of the player's score based on the coins collected.
+    - Implement a game over condition when the player collects a certain number of coins or reaches a
+    - Implement margin functionality to prevent the player from moving outside the game area.
+ */
 int main() {
+    
     WindowsConfig::hideCursor();
 
-    int x = 10; // Posición horizontal inicial
-    int y = 5;  // Posición vertical inicial
+    int x = 10;
+    int y = 5;
     char tecla;
-
     bool jugando = true;
 
-    while (jugando) {
-        system("cls");
-
-        for (int i = 0; i < y; i++) {
-            std::cout << "\n";
-        }
-
-        for (int i = 0; i < x; i++) {
-            std::cout << " ";
-        }
-
-        Player::getDefaultPlayerSpreat();
-
-        tecla = _getch();
-
-        if (tolower(tecla) == 'w') y--;
-        if (tolower(tecla) == 's') y++;
-        if (tolower(tecla) == 'a') x--;
-        if (tolower(tecla) == 'd') x++;
-        else if (tecla == 0 || tecla == -32 || tecla == 224) {
-            char flecha = _getch();
-
-            if (flecha == 72) y--;
-            else if (flecha == 80) y++;
-            else if (flecha == 75) x--;
-            else if (flecha == 77) x++;
-        }
-
-        if (tolower(tecla) == 'q') {
-            WindowsConfig::showCursor();
-            jugando = false;
-        }
-    }
+    MovementRecorder::characterRecordMovement(x, y, tecla, jugando);
 
     return 0;
 }

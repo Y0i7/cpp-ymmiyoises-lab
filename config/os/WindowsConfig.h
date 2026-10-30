@@ -1,3 +1,7 @@
+/*
+ ? ABOUT THIS FILE:
+    - This file contains the implementation of the WindowsConfig class.
+ */
 #pragma once
 #include <windows.h>
 

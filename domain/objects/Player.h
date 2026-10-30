@@ -1,3 +1,9 @@
+/*
+ ? ABOUT THIS FILE:
+    - This file contains the implementation of the Player class.
+    - The Player class is used to represent a player in the game.
+    - Each player has a name and a number of coins.
+ */
 #pragma once
 #include <iostream>
 #include <string>
