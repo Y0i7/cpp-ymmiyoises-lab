@@ -25,4 +25,10 @@ public:
         cursorInfo.bVisible = true;
         SetConsoleCursorInfo(hConsole, &cursorInfo);
     }
+
+    static void goToXY(int x, int y) {
+        HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        COORD position = {(SHORT)x, (SHORT)y};
+        SetConsoleCursorPosition(handle, position);
+    }
 };

@@ -4,6 +4,7 @@
  */
 #include "config/os/WindowsConfig.h"
 #include "actions/movements/MovementRecorder.h"
+#include "config/game/CollisionMargins.h"
 
 /*
  TODO:
@@ -15,11 +16,15 @@
 int main() {
     
     WindowsConfig::hideCursor();
+    CollisionMargins::getMarginSprite();
 
     int x = 10;
     int y = 5;
     char tecla;
     bool jugando = true;
+
+    WindowsConfig::goToXY(x, y);
+    Player::getDefaultPlayerSpreat();
 
     MovementRecorder::characterRecordMovement(x, y, tecla, jugando);
 

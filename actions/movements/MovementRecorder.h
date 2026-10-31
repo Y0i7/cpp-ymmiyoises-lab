@@ -11,6 +11,8 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+
+#include "../../config/utils/Constants.h"
 #include "../../domain/objects/Player.h"
 /*
  TODO :
@@ -24,39 +26,46 @@ namespace  MovementRecorder {
     /*
      ! IMPORTATN: Implement Constants for the movement limits of the character.
      */
-    inline void characterRecordMovement(int x, int y, char tecla, bool jugando) {
+    inline void characterRecordMovement(int currentPositionX, int currentPositionY, char tecla, bool jugando) {
         while (jugando) {
-            system("cls");
+            if (_kbhit()) {
 
-            for (int i = 0; i < y; i++) {
-                std::cout << "\n";
-            }
+                tecla = tolower(_getch());
 
-            for (int i = 0; i < x; i++) {
+                WindowsConfig::goToXY(currentPositionX, currentPositionY);
                 std::cout << " ";
+
+                int nextPositionX = currentPositionX;
+                int nextPositionY = currentPositionY;
+
+                if (tecla == 'w') nextPositionY--;
+                else if (tecla == 's') nextPositionY++;
+                else if (tecla == 'a') nextPositionX--;
+                else if (tecla == 'd') nextPositionX++;
+                else if (tecla == 0 || tecla == -32 || tecla == 224) {
+                    char flecha = _getch();
+
+                    if (flecha == 72) nextPositionY--;
+                    else if (flecha == 80) nextPositionY++;
+                    else if (flecha == 75) nextPositionX--;
+                    else if (flecha == 77) nextPositionX++;
+                }
+
+                if (tolower(tecla) == 'q') {
+                    WindowsConfig::showCursor();
+                    jugando = false;
+                }
+
+                if (nextPositionX > Constants::LEFT_LIMIT && nextPositionX < Constants::RIGHT_LIMIT)
+                    currentPositionX = nextPositionX;
+
+                if (nextPositionY > Constants::TOP_LIMIT && nextPositionY < Constants::BOTTOM_LIMIT)
+                    currentPositionY = nextPositionY;
+
+                WindowsConfig::goToXY(currentPositionX, currentPositionY);
+                Player::getDefaultPlayerSpreat();
             }
 
-            Player::getDefaultPlayerSpreat();
-
-            tecla = tolower(_getch());
-
-            if (tecla == 'w') y--;
-            else if (tecla == 's') y++;
-            else if (tecla == 'a') x--;
-            else if (tecla == 'd') x++;
-            else if (tecla == 0 || tecla == -32 || tecla == 224) {
-                char flecha = _getch();
-
-                if (flecha == 72) y--;
-                else if (flecha == 80) y++;
-                else if (flecha == 75) x--;
-                else if (flecha == 77) x++;
-            }
-
-            if (tolower(tecla) == 'q') {
-                WindowsConfig::showCursor();
-                jugando = false;
-            }
         }
     }
 };

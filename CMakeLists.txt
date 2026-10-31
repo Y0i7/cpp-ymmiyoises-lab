@@ -9,4 +9,5 @@ add_executable(untitled main.cpp
         domain/objects/Coins.h
         domain/enums/CoinType.h
         config/utils/Constants.h
-        actions/movements/MovementRecorder.h)
+        actions/movements/MovementRecorder.h
+        config/game/CollisionMargins.h)

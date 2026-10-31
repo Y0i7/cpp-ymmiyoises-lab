@@ -10,8 +10,7 @@ namespace  Constants {
     inline  constexpr int LEFT_LIMIT = 0;
     inline  constexpr int RIGHT_LIMIT = 50;
     inline  constexpr int TOP_LIMIT = 0;
-    inline  constexpr int BOTTOM_LIMIT = 25;
-    inline  constexpr char MARGIN_SPRITE = '#';
+    inline  constexpr int BOTTOM_LIMIT = 20;
 };
 
 
